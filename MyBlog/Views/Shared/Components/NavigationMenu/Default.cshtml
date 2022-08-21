@@ -1,0 +1,15 @@
+﻿@using MyBlog.Models.ViewModels
+@model IEnumerable<NavigationLinkViewModel>
+<nav class="navbar navbar-expand-md navbar-light">
+    <a class="navbar-brand" asp-action="Index" asp-controller="Home">Главная</a>
+
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav">
+           @foreach(var item in Model){
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="@item.Action" asp-controller="@item.Controller">@item.Title</a>
+                </li>
+           }
+        </ul>
+    </div>
+</nav>

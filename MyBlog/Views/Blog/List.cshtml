@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Список";
+}
+
+@foreach(var blog in Model){
+   @await Html.PartialAsync("BlogSummary",blog)
+}
+
