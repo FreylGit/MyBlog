@@ -12,30 +12,28 @@ namespace MyBlog.Data.Repositories
             _context = context;
         }
 
-        public void Add(Post post)
+        public void Save(Post post)
         {
             if (_context != null)
             {
-                if (post != null)
-                {
-                    _context.Posts.Add(post);
-                    _context.SaveChanges();
-                }
-            }
-        }
-
-        public void Update(Post post)
-        {
-            if (_context != null)
-            {
-                if(post!= null)
+                
+                if (_context.Posts.FirstOrDefault(p=>p.Id==post.Id) != null)
                 {
                     _context.Posts.Update(post);
-                    _context.SaveChanges();
+
                 }
+                else
+                {
+                    var blog = _context.Blogs.FirstOrDefault(b => b.Id == post.BlogId);
+                    if (blog != null)
+                    {
+                        _context.Posts.Add(post);
+                    }
+                    
+                }
+                _context.SaveChanges();
             }
         }
-
         public void Delete(Guid postId)
         {
             if (_context != null)

@@ -64,5 +64,23 @@ namespace MyBlog.Tests
             var result = controller.Edit(blog.Id).ViewData.Model as Blog;
             Assert.Null(result);
         }
+
+        [Fact]
+        public void Show_Blog_By_Id()
+        {
+            var id1 = Guid.NewGuid();
+            var id2 = Guid.NewGuid();
+            Mock<IBlogRepository> mock = new Mock<IBlogRepository>();
+            mock.Setup(m => m.Blogs).Returns((new Blog[] {
+                new Blog {Id = id1,Name ="B1"},
+                new Blog {Id = id2,Name ="B2"},
+            }).AsQueryable<Blog>());
+
+            BlogController controller = new BlogController(mock.Object);
+            var result = controller.Index(id1).ViewData.Model as Blog;
+
+            Assert.Equal(result.Name, "B1");
+
+        }
     }
 }

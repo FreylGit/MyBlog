@@ -1,0 +1,31 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Редактирование поста";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-9 ">
+         
+        <form asp-action="Edit" asp-controller="Post">
+            <input type="hidden" asp-for="BlogId" value="@Model.BlogId"/>
+                <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Text"></label>
+                    <textarea class="form-control" asp-for="Text"></textarea>
+            </div>
+            <div class="btn-group mt-3">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a asp-action="List" asp-controller="Blog" class="btn btn-danger">Отменить</a>
+            </div>
+         
+        </form>
+        </div>
+    </div>
+
+</div>
+
+

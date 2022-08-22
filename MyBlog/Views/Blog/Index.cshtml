@@ -1,0 +1,15 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = Model.Name;
+}
+<div class="mt-5 text-center">
+    <a asp-action="Create" asp-controller="Post" class="btn btn-primary" asp-route-id="@Model.Id">Создать пост</a>
+    @if(Model.Posts.Count()>0){
+        @foreach(var post in Model.Posts){
+            <h1>@post.Title</h1>
+        }
+    }else{
+        <h1>Постов нет</h1>
+    }
+</div>
+

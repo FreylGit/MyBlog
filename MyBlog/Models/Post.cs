@@ -19,7 +19,7 @@ namespace MyBlog.Models
         
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
-        public Blog Blog { get; set; }
+        public Blog? Blog { get; set; }
         public Guid BlogId { get; set; }
         public override string ToString()
         {

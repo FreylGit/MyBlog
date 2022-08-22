@@ -48,13 +48,21 @@ namespace MyBlog.Controllers
 
         public ViewResult List()
         {
-            
             return View(_blogRepository.Blogs);
         }
 
-        public IActionResult Index()
+        public ViewResult Index(Guid id)
         {
-            return View();
+            var blog = _blogRepository.Blogs.FirstOrDefault(b=>b.Id==id);
+            if (blog != null)
+            {
+                return View(blog);
+            }
+            else
+            {
+                return View();
+            }
+            
         }
     }
 }
