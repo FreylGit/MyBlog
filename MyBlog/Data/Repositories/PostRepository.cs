@@ -16,11 +16,9 @@ namespace MyBlog.Data.Repositories
         {
             if (_context != null)
             {
-                
-                if (_context.Posts.FirstOrDefault(p=>p.Id==post.Id) != null)
+                if (_context.Posts.FirstOrDefault(p => p.Id == post.Id) != null)
                 {
                     _context.Posts.Update(post);
-
                 }
                 else
                 {
@@ -29,11 +27,11 @@ namespace MyBlog.Data.Repositories
                     {
                         _context.Posts.Add(post);
                     }
-                    
                 }
                 _context.SaveChanges();
             }
         }
+
         public void Delete(Guid postId)
         {
             if (_context != null)

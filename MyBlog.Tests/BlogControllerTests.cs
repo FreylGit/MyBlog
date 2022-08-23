@@ -3,12 +3,6 @@ using Moq;
 using MyBlog.Controllers;
 using MyBlog.Data.Interfaces;
 using MyBlog.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyBlog.Tests
 {
@@ -28,8 +22,8 @@ namespace MyBlog.Tests
             BlogController controller = new BlogController(mock.Object);
             var blog = new Blog { Name = "test" };
             IActionResult result = controller.Edit(blog);
-            mock.Verify(m=>m.Save(blog));
-            Assert.IsType< RedirectToActionResult > (result);
+            mock.Verify(m => m.Save(blog));
+            Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", (result as RedirectToActionResult)?.ActionName);
         }
         [Fact]
@@ -80,6 +74,22 @@ namespace MyBlog.Tests
             var result = controller.Index(id1).ViewData.Model as Blog;
 
             Assert.Equal(result.Name, "B1");
+        }
+
+        [Fact]
+        public void Check_Delte_Blog()
+        {
+            var id1 = Guid.NewGuid();
+            var id2 = Guid.NewGuid();
+            Mock<IBlogRepository> mock = new Mock<IBlogRepository>();
+            mock.Setup(m => m.Blogs).Returns((new Blog[] {
+                new Blog {Id = id1,Name ="B1"},
+                new Blog {Id = id2,Name ="B2"},
+            }).AsQueryable<Blog>());
+
+            BlogController controller = new BlogController(mock.Object);
+            var result = controller.Delete(id1);
+            mock.Verify(m => m.Delete(id1));
 
         }
     }

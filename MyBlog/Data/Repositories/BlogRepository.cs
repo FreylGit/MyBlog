@@ -6,9 +6,9 @@ namespace MyBlog.Data.Repositories
 {
     public class BlogRepository : IBlogRepository
     {
-        public IQueryable<Blog> Blogs => _context.Blogs.Include(p=>p.Posts);
+        public IQueryable<Blog> Blogs => _context.Blogs.Include(p => p.Posts);
 
-        private  ApplicationDbContext _context;
+        private ApplicationDbContext _context;
         public BlogRepository(ApplicationDbContext context)
         {
             _context = context;
@@ -18,12 +18,13 @@ namespace MyBlog.Data.Repositories
             if (_context != null)
             {
                 var blog = _context.Blogs.FirstOrDefault(b => b.Id == blogId);
-                if (blog != null)
+                var posts = _context.Posts.Where(p => p.BlogId == blog.Id);
+                foreach (var post in posts)
                 {
-                    _context.RemoveRange(blog.Posts);
-                    _context.Remove(blog);
-                    _context.SaveChanges();
+                    _context.Posts.Remove(post);
                 }
+                _context.Blogs.Remove(blog);
+                _context.SaveChanges();
             }
         }
 
@@ -41,7 +42,7 @@ namespace MyBlog.Data.Repositories
                 }
                 _context.SaveChanges();
             }
-                
+
         }
     }
 }

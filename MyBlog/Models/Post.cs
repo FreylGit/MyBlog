@@ -15,8 +15,8 @@ namespace MyBlog.Models
         public string Title { get; set; }
         [Required(ErrorMessage = "Введите текст поста")]
         [MaxLength(500)]
-        [Display(Name ="Текст")]
-        
+        [Display(Name = "Текст")]
+
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
         public Blog? Blog { get; set; }

@@ -1,15 +1,20 @@
 ﻿@model Blog
 
-<div class="card card-outline-primary mb-4 p-1" style="border-radius:5px;">
-    <div class="card-header">
-        <h4>@Model.Name</h4>
+<form method="post" asp-action="Delete">
+    <div class="card card-outline-primary mb-4 p-1" style="border-radius:5px;">
+        <div class="card-header">
+            <h4>@Model.Name</h4>
+        </div>
+        <div class="card-body">
+            <p>@Model.Description</p>
+        </div>
+        <div class="card-footer">
+            <span>@Model.CreateData.ToString()</span>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-primary" asp-action="Index" asp-route-id="@Model.Id">Просмотреть</a>
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <input type="hidden" name="id" value="@Model.Id" />
+        </div>
     </div>
-    <div class="card-body">
-        <p>@Model.Description</p>
-    </div>
-    <div class="card-footer">
-        <span>@Model.CreateData.ToString()</span>
-    </div>
-    <a class="btn btn-primary" asp-action="Index" asp-route-id="@Model.Id">Просмотреть</a>
-    <input type="hidden" name="@Model.Id" value="@Model.Id" />
-</div>
+</form>

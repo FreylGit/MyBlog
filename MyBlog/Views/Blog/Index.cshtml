@@ -6,7 +6,7 @@
     <a asp-action="Create" asp-controller="Post" class="btn btn-primary" asp-route-id="@Model.Id">Создать пост</a>
     @if(Model.Posts.Count()>0){
         @foreach(var post in Model.Posts){
-            <h1>@post.Title</h1>
+            @await Html.PartialAsync("PostSummary",post)
         }
     }else{
         <h1>Постов нет</h1>
