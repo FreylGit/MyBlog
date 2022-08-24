@@ -5,7 +5,6 @@ namespace MyBlog.Models
 {
     public class Blog
     {
-        [BindNever]
         [Key]
         public Guid Id { get; set; }
         [Required(ErrorMessage = "Введите название блога")]

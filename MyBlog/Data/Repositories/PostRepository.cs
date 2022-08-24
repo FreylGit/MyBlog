@@ -16,9 +16,11 @@ namespace MyBlog.Data.Repositories
         {
             if (_context != null)
             {
-                if (_context.Posts.FirstOrDefault(p => p.Id == post.Id) != null)
+                var postEntity = _context.Posts.FirstOrDefault(p => p.Id == post.Id);
+                if (postEntity != null)
                 {
-                    _context.Posts.Update(post);
+                    postEntity.Title = post.Title;
+                    postEntity.Text  = post.Text;
                 }
                 else
                 {

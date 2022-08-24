@@ -32,9 +32,11 @@ namespace MyBlog.Data.Repositories
         {
             if (_context != null)
             {
-                if (_context.Blogs.FirstOrDefault(b => b.Id == blog.Id) != null)
+                var blogEntity = _context.Blogs.FirstOrDefault(b => b.Id == blog.Id);
+                if (blogEntity != null)
                 {
-                    _context.Blogs.Update(blog);
+                    blogEntity.Name = blog.Name;
+                    blogEntity.Description = blog.Description;
                 }
                 else
                 {

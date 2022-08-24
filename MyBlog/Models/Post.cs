@@ -5,7 +5,7 @@ namespace MyBlog.Models
 {
     public class Post
     {
-        [BindNever]
+
         [Key]
         public Guid Id { get; set; }
 

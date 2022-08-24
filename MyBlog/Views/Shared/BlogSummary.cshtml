@@ -13,6 +13,7 @@
         </div>
         <div class="btn-group">
             <a class="btn btn-primary" asp-action="Index" asp-route-id="@Model.Id">Просмотреть</a>
+            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Изменить</a>
             <button type="submit" class="btn btn-danger">Удалить</button>
             <input type="hidden" name="id" value="@Model.Id" />
         </div>
