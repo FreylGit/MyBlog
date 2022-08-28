@@ -44,5 +44,12 @@ namespace MyBlog.Controllers
             return View("Edit", new Post() { BlogId = id });
         }
         #endregion
+        public IActionResult Delete(Guid id)
+        {
+            _postRepository.Delete(id);
+            
+            return RedirectToAction("Index","Home");
+
+        }
     }
 }

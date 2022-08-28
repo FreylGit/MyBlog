@@ -1,4 +1,5 @@
-﻿using MyBlog.Data.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using MyBlog.Data.Interfaces;
 using MyBlog.Models;
 
 namespace MyBlog.Data.Repositories
@@ -33,7 +34,6 @@ namespace MyBlog.Data.Repositories
                 _context.SaveChanges();
             }
         }
-
         public void Delete(Guid postId)
         {
             if (_context != null)
@@ -44,7 +44,9 @@ namespace MyBlog.Data.Repositories
                     _context.Posts.Remove(post);
                     _context.SaveChanges();
                 }
+                return post;
             }
+            return null;
         }
     }
 }
